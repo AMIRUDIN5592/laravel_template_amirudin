@@ -1,0 +1,26 @@
+@extends('layouts.admin')
+
+@section('title', 'Edit __MODEL__')
+@section('page-title', 'Edit __MODEL__')
+
+@section('content')
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Form Edit __MODEL__</h3>
+                </div>
+                <form action="{{ route('__ROUTE__.update', $__MODEL_VAR__->id) }}" method="POST">
+                    @csrf
+                    <div class="card-body">
+                        <x-admin.input name="name" label="Name" :value="$__MODEL_VAR__->name" required />
+                    </div>
+                    <div class="card-footer">
+                        <x-admin.button>Update</x-admin.button>
+                        <a href="{{ route('__ROUTE__.index') }}" class="btn btn-secondary">Kembali</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection

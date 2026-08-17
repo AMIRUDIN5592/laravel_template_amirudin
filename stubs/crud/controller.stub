@@ -1,0 +1,59 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\__MODEL__;
+use Illuminate\Http\Request;
+
+class __CONTROLLER__ extends Controller
+{
+    public function index()
+    {
+        $__MODEL_VAR_PLURAL__ = __MODEL__::cursorPaginate(10);
+
+        return view('__VIEW__.index', compact('__MODEL_VAR_PLURAL__'));
+    }
+
+    public function create()
+    {
+        return view('__VIEW__.create');
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        __MODEL__::create($data);
+
+        return redirect()->route('__ROUTE__.index')->with('success', '__MODEL_PLURAL__ berhasil ditambahkan.');
+    }
+
+    public function edit(string $id)
+    {
+        $__MODEL_VAR__ = __MODEL__::findOrFail($id);
+
+        return view('__VIEW__.edit', compact('__MODEL_VAR__'));
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $__MODEL_VAR__ = __MODEL__::findOrFail($id);
+        $__MODEL_VAR__->update($data);
+
+        return redirect()->route('__ROUTE__.index')->with('success', '__MODEL_PLURAL__ berhasil diperbarui.');
+    }
+
+    public function destroy(string $id)
+    {
+        $__MODEL_VAR__ = __MODEL__::findOrFail($id);
+        $__MODEL_VAR__->delete();
+
+        return redirect()->route('__ROUTE__.index')->with('success', '__MODEL_PLURAL__ berhasil dihapus.');
+    }
+}

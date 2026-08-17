@@ -1,0 +1,26 @@
+@extends('layouts.admin')
+
+@section('title', 'Tambah __MODEL__')
+@section('page-title', 'Tambah __MODEL__')
+
+@section('content')
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Form Tambah __MODEL__</h3>
+                </div>
+                <form action="{{ route('__ROUTE__.store') }}" method="POST">
+                    @csrf
+                    <div class="card-body">
+                        <x-admin.input name="name" label="Name" :value="old('name')" required />
+                    </div>
+                    <div class="card-footer">
+                        <x-admin.button>Simpan</x-admin.button>
+                        <a href="{{ route('__ROUTE__.index') }}" class="btn btn-secondary">Kembali</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection

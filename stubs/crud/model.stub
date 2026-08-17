@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class __MODEL__ extends Model
+{
+    protected $fillable = [
+        'name',
+    ];
+}
