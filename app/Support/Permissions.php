@@ -8,6 +8,8 @@ final class Permissions
 
     public const MANAGE_PRODUCTS = 'manage-products';
 
+    public const MANAGE_ROLES = 'manage-roles';
+
     /**
      * All available permissions.
      *
@@ -18,6 +20,7 @@ final class Permissions
         return [
             self::MANAGE_USERS,
             self::MANAGE_PRODUCTS,
+            self::MANAGE_ROLES,
         ];
     }
 }

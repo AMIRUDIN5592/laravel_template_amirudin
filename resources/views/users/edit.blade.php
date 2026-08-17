@@ -17,11 +17,18 @@
                         <x-admin.input name="name" label="Name" :value="$user->name" required />
                         <x-admin.input name="email" label="Email" type="email" :value="$user->email" required />
 
+                        @php
+                            $roleOptions = ['' => '-- Pilih Role --'];
+                            foreach ($roles as $role) {
+                                $roleOptions[$role->name] = $role->label;
+                            }
+                        @endphp
+
                         <x-admin.select
                             name="role"
                             label="Role"
                             :value="$user->role"
-                            :options="['' => '-- Pilih Role --', 'admin' => 'Admin', 'superadmin' => 'Superadmin']"
+                            :options="$roleOptions"
                         />
 
                         <x-admin.input name="password" label="Password" type="password" placeholder="Kosongkan jika tidak diubah" />

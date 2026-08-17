@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Product;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -19,8 +20,15 @@ class CrudSmokeTest extends TestCase
         ]);
     }
 
+    private function seedRoles(): void
+    {
+        Role::create(['name' => 'admin', 'label' => 'Admin', 'permissions' => ['manage-products']]);
+        Role::create(['name' => 'superadmin', 'label' => 'Superadmin', 'permissions' => ['*']]);
+    }
+
     public function test_users_crud_works(): void
     {
+        $this->seedRoles();
         $this->actingAs($this->admin());
 
         $this->get('/users')->assertOk();

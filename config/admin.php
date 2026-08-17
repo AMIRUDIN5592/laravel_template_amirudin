@@ -47,6 +47,13 @@ return [
             'can' => 'manage-products',
             'active' => 'product.*',
         ],
+        [
+            'label' => 'Role & Permission',
+            'route' => 'roles.index',
+            'icon' => 'bi bi-shield-lock',
+            'can' => 'manage-roles',
+            'active' => 'roles.*',
+        ],
     ],
 
 ];

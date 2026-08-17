@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
@@ -24,7 +26,9 @@ class UsersController extends Controller
      */
     public function create(): View
     {
-        return view('users.create');
+        $roles = Role::orderBy('name')->get();
+
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -35,7 +39,7 @@ class UsersController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'role' => 'nullable|in:admin,superadmin',
+            'role' => ['nullable', Rule::in(Role::pluck('name')->all())],
             'password' => 'required|string|min:8',
         ]);
         User::create($data);
@@ -49,8 +53,9 @@ class UsersController extends Controller
     public function edit(string $id): View
     {
         $user = User::findOrFail($id);
+        $roles = Role::orderBy('name')->get();
 
-        return view('users.edit', compact('user'));
+        return view('users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -61,7 +66,7 @@ class UsersController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,'.$id,
-            'role' => 'nullable|in:admin,superadmin',
+            'role' => ['nullable', Rule::in(Role::pluck('name')->all())],
             'password' => 'nullable|string|min:8',
         ]);
 

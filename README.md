@@ -79,17 +79,21 @@ Bila ingin menu muncul di sidebar, tambahkan entri di `config/admin.php`.
 
 ## Role & Permission
 
-Role disimpan di kolom `users.role` (`admin` / `superadmin`, atau `NULL` untuk user biasa).
+Role disimpan di kolom `users.role` (`admin` / `superadmin`, atau `NULL` untuk user biasa). Hak akses (permission) tiap role disimpan di tabel `roles` dan bisa dikelola dari menu **Role & Permission** (khusus superadmin).
 
-Pemetaan role → permission ada di `User::ROLE_PERMISSIONS`:
+Pemetaan default role → permission:
 
 | Role       | Permission                          |
 | ---------- | ----------------------------------- |
-| superadmin | `*` (semua permission)              |
+| superadmin | `*` (semua permission, dikunci)     |
 | admin      | `manage-products`                   |
 | user biasa | —                                   |
 
-Permission didefinisikan di `app/Support/Permissions.php`. Untuk menambah permission baru: tambah konstanta di `Permissions`, lalu daftarkan ke role yang sesuai di `User::ROLE_PERMISSIONS`.
+Superadmin selalu memiliki semua permission (nilai `*` dikunci dan tidak bisa diubah). Permission role lain (mis. `admin`) bisa diubah lewat halaman Role & Permission.
+
+Role baru bisa ditambahkan lewat tombol **Tambah Role** di halaman Role & Permission (menu khusus superadmin). Nama role disimpan sebagai slug (mis. `editor`) dan otomatis tersedia di dropdown Role pada form Users.
+
+Permission didefinisikan di `app/Support/Permissions.php`. Untuk menambah permission baru: tambah konstanta di `Permissions` dan daftarkan di `Permissions::all()`. Permission baru akan otomatis muncul di halaman Role & Permission.
 
 Helper di model `User`:
 

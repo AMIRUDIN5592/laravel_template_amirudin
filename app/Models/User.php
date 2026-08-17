@@ -38,7 +38,19 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function hasPermission(string $permission): bool
     {
-        $allowed = self::ROLE_PERMISSIONS[$this->role] ?? [];
+        if ($this->isSuperAdmin()) {
+            return true;
+        }
+
+        if ($this->role === null || $this->role === '') {
+            return false;
+        }
+
+        $role = Role::where('name', $this->role)->first();
+
+        $allowed = $role !== null
+            ? $role->permissionList()
+            : (self::ROLE_PERMISSIONS[$this->role] ?? []);
 
         return in_array('*', $allowed, true) || in_array($permission, $allowed, true);
     }
