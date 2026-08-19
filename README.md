@@ -2,6 +2,9 @@
 
 Starter kit aplikasi admin berbasis **Laravel 13**, **AdminLTE 4 (Bootstrap 5)**, dan **Breeze** untuk autentikasi. Sudah termasuk role-based access control (`admin` & `superadmin`), contoh CRUD, dan generator CRUD siap pakai.
 
+Donasi seikhlasnya untuk coffe
+https://app.midtrans.com/payment-links/04330633-5a23-4252-b259-eff0223436b2-sLpP7akQ
+
 ## Fitur
 
 - Laravel 13 + PHP 8.3
